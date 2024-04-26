@@ -20,6 +20,8 @@ gem "tailwindcss-rails"
 
 gem "jbuilder"
 
+gem 'devise', '~> 4.9', '>= 4.9.3'
+
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem "bootsnap", require: false
