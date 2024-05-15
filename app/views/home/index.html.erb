@@ -27,7 +27,9 @@
             </div>
             <p class="mt-0.5 text-sm text-gray-500">Hosted by Ali</p>
             <p class="mt-0.5 text-sm text-gray-500">12-22 Feb</p>
-            <p class="mt-0.5 text-sm font-light text-black-500"><span class="font-semibold">MAD1500</span> night</p>
+            <p class="mt-0.5 text-sm font-light text-black-500">
+              <span class="font-semibold"><%= humanized_money_with_symbol(property.price) %> </span> night
+              </p>
           </div>
         </div>
       <% end %>
