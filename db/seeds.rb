@@ -7,8 +7,18 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-20.times do
-    Property.create!({
+
+# Collect all image files from the db/images directory
+image_files = Dir.glob("db/images/*")
+
+# Ensure there are enough images to avoid index errors
+if image_files.size < 2
+  puts "Not enough images to seed properties."
+  exit
+end
+
+20.times do |i|
+    property = Property.create!({
         name: Faker::Address.community,
         description: Faker::Lorem.paragraph(sentence_count: 3),
         headline: Faker::Address.community,
@@ -18,4 +28,7 @@
         country: Faker::Address.country,
         price: Money.from_amount((50..100).to_a.sample, 'USD'),
     })
+
+    property.images.attach(io: File.open(image_files[i % image_files.size]), filename: File.basename(image_files[i % image_files.size]))
+    property.images.attach(io: File.open(image_files[(i + 1) % image_files.size]), filename: File.basename(image_files[(i + 1) % image_files.size]))
 end
