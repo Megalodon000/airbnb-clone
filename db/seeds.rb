@@ -8,6 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+user = User.create!({
+    email: "alimercad@gmail.com",
+    password: "123456",
+})
+
 # Collect all image files from the db/images directory
 image_files = Dir.glob("db/images/*")
 
@@ -31,4 +36,19 @@ end
 
     property.images.attach(io: File.open(image_files[i % image_files.size]), filename: File.basename(image_files[i % image_files.size]))
     property.images.attach(io: File.open(image_files[(i + 1) % image_files.size]), filename: File.basename(image_files[(i + 1) % image_files.size]))
+
+    ((50..100).to_a.sample).times do
+      Review.create!({
+        content: Faker::Lorem.paragraph(sentence_count: 10),
+        cleanliness_rating: (1..5).to_a.sample,
+        accuracy_rating: (1..5).to_a.sample,
+        checkin_rating: (1..5).to_a.sample,
+        communication_rating: (1..5).to_a.sample,
+        value_rating: (1..5).to_a.sample,
+        location_rating: (1..5).to_a.sample,
+        final_rating: (1..5).to_a.sample,
+        property: property,
+        user: user,
+      })
+    end
 end
