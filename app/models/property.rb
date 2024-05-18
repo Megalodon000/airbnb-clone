@@ -10,4 +10,9 @@ class Property < ApplicationRecord
     has_many_attached :images
 
     has_many :reviews, dependent: :destroy
+
+    def update_average_final_rating
+        self.average_final_rating = reviews.average(:final_rating).to_f
+        self.save
+    end
 end
