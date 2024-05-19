@@ -18,9 +18,8 @@ class Review < ApplicationRecord
     sum_of_ratings = cleanliness_rating + accuracy_rating + checkin_rating + communication_rating + value_rating + location_rating
     self.final_rating = sum_of_ratings.to_f / 6 # Convert sum to float before division
     self.save
+    
+    property.update_average_rating
   end
 
-  def update_average_final_rating
-    property.update_average_final_rating
-  end
 end

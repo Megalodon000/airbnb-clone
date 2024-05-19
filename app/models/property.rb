@@ -5,14 +5,15 @@ class Property < ApplicationRecord
     validates :adress_1, presence: true
     validates :city, presence: true
     validates :country, presence: true
-
+  
     monetize :price_cents, allow_nil: true
     has_many_attached :images
-
+  
     has_many :reviews, dependent: :destroy
-
-    def update_average_final_rating
-        self.average_final_rating = reviews.average(:final_rating).to_f
-        self.save
-    end
-end
+  
+    def update_average_rating
+        average_rating = reviews.average(:final_rating)
+        update_column(:average_final_rating, average_rating)
+      end
+  end
+  

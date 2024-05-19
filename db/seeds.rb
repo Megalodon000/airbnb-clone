@@ -22,7 +22,7 @@ if image_files.size < 2
   exit
 end
 
-20.times do |i|
+10.times do |i|
     property = Property.create!({
         name: Faker::Address.community,
         description: Faker::Lorem.paragraph(sentence_count: 3),
