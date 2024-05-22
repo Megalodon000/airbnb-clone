@@ -21,4 +21,33 @@ export default class extends Controller {
       this.element.dataset.status = "false";
     }
   }
+
+  addPropertyToWishlist(propertyId, userId) {
+    const params = {
+      property_id: propertyId,
+      user_id: userId,
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(params)
+    };
+
+    fetch("/api/wishlists", options)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 }
